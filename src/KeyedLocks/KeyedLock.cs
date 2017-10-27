@@ -6,26 +6,25 @@ namespace KeyedLocks
 {
     public class KeyedLock<T>
     {
-        protected internal readonly ConcurrentDictionary<T, object> _locks;
+        protected internal readonly ConcurrentDictionary<T, object> Locks;
 
-        public KeyedLock()
-            : this(EqualityComparer<T>.Default)
+        public KeyedLock() : this(EqualityComparer<T>.Default)
         {
         }
 
         public KeyedLock(IEqualityComparer<T> comparer)
         {
-            _locks = new ConcurrentDictionary<T, object>(comparer);
+            Locks = new ConcurrentDictionary<T, object>(comparer);
         }
 
         public object GetLock(T key)
         {
-            return _locks.GetOrAdd(key, _ => new object());
+            return Locks.GetOrAdd(key, _ => new object());
         }
 
         public TResult RunWithLock<TResult>(T key, Func<TResult> func)
         {
-            lock (_locks.GetOrAdd(key, _ => new object()))
+            lock (Locks.GetOrAdd(key, _ => new object()))
             {
                 return func();
             }
@@ -33,7 +32,7 @@ namespace KeyedLocks
 
         public void RunWithLock(T key, Action action)
         {
-            lock (_locks.GetOrAdd(key, _ => new object()))
+            lock (Locks.GetOrAdd(key, _ => new object()))
             {
                 action();
             }
@@ -42,7 +41,7 @@ namespace KeyedLocks
         public void RemoveLock(T key)
         {
             object o;
-            _locks.TryRemove(key, out o);
+            Locks.TryRemove(key, out o);
         }
     }
 }

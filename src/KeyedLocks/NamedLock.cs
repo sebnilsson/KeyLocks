@@ -8,8 +8,7 @@ namespace KeyedLocks
         {
         }
 
-        public NamedLock(IEqualityComparer<string> comparer)
-            : base(comparer)
+        public NamedLock(IEqualityComparer<string> comparer) : base(comparer)
         {
         }
     }

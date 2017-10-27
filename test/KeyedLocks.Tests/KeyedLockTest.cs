@@ -19,17 +19,16 @@ namespace KeyedLocks.Tests
             var hasCollision = false;
 
             // Act
-            Parallel.ForEach(new[] {key1, key2, key3}, key =>
-                keyedLock.RunWithLock(key, () =>
-                {
-                    hasCollision = hasCollision || isRunning;
+            Parallel.ForEach(new[] {key1, key2, key3}, key => keyedLock.RunWithLock(key, () =>
+            {
+                hasCollision = hasCollision || isRunning;
 
-                    isRunning = true;
+                isRunning = true;
 
-                    Thread.Sleep(SleepTimoutMs);
+                Thread.Sleep(SleepTimoutMs);
 
-                    isRunning = false;
-                }));
+                isRunning = false;
+            }));
 
             // Assert
             Assert.True(hasCollision);
@@ -46,17 +45,16 @@ namespace KeyedLocks.Tests
             var hasCollision = false;
 
             // Act
-            Parallel.For(0, ParallelRunCount, _ =>
-                keyedLock.RunWithLock(key, () =>
-                {
-                    hasCollision = hasCollision || isRunning;
+            Parallel.For(0, ParallelRunCount, _ => keyedLock.RunWithLock(key, () =>
+            {
+                hasCollision = hasCollision || isRunning;
 
-                    isRunning = true;
+                isRunning = true;
 
-                    Thread.Sleep(SleepTimoutMs);
+                Thread.Sleep(SleepTimoutMs);
 
-                    isRunning = false;
-                }));
+                isRunning = false;
+            }));
 
             // Assert
             Assert.False(hasCollision);
