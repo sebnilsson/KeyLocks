@@ -4,16 +4,16 @@ using Xunit;
 
 namespace KeyedLocks.Tests
 {
-    public class KeyedLockTest : TestBase
+    public class KeyedIntLockTest : TestBase
     {
         [Fact]
-        public void RunWithLock_IdenticalLookingKey_HasCollision()
+        public void RunWithLock_UniqueObjectKeys_HasNoCollision()
         {
             // Arrange
-            var key1 = new object();
-            var key2 = new object();
-            var key3 = new object();
-            var keyedLock = new KeyedLock<object>();
+            const int key1 = 123;
+            const int key2 = 122 + 1;
+            const int key3 = 121 + 2;
+            var keyedLock = new KeyedLock<int>();
 
             var isRunning = false;
             var hasCollision = false;
@@ -31,15 +31,15 @@ namespace KeyedLocks.Tests
             }));
 
             // Assert
-            Assert.True(hasCollision);
+            Assert.False(hasCollision);
         }
 
         [Fact]
-        public void RunWithLock_SameKey_HasNoCollision()
+        public void RunWithLock_SameInstanceKey_HasNoCollision()
         {
             // Arrange
-            var key = new object();
-            var keyedLock = new KeyedLock<object>();
+            const int key = 123;
+            var keyedLock = new KeyedLock<int>();
 
             var isRunning = false;
             var hasCollision = false;
@@ -61,13 +61,13 @@ namespace KeyedLocks.Tests
         }
 
         [Fact]
-        public void RunWithLockOfTResult_IdenticalLookingKey_HasCollision()
+        public void RunWithLockOfTResult_UniqueObjectKeys_HasNoCollision()
         {
             // Arrange
-            var key1 = new object();
-            var key2 = new object();
-            var key3 = new object();
-            var keyedLock = new KeyedLock<object>();
+            const int key1 = 123;
+            const int key2 = 122 + 1;
+            const int key3 = 121 + 2;
+            var keyedLock = new KeyedLock<int>();
 
             var isRunning = false;
             var hasCollision = false;
@@ -90,15 +90,48 @@ namespace KeyedLocks.Tests
             });
 
             // Assert
+            Assert.False(hasCollision);
+        }
+
+        [Fact]
+        public void RunWithLockOfTResult_UniqueObjectKeys_HasCollision()
+        {
+            // Arrange
+            const int key1 = 123;
+            const int key2 = 12345;
+            const int key3 = 1234567;
+            var keyedLock = new KeyedLock<int>();
+
+            var isRunning = false;
+            var hasCollision = false;
+
+            // Act
+            Parallel.ForEach(new[] { key1, key2, key3 }, key =>
+            {
+                var _ = keyedLock.RunWithLock(key, () =>
+                {
+                    hasCollision = hasCollision || isRunning;
+
+                    isRunning = true;
+
+                    Thread.Sleep(2000);
+
+                    isRunning = false;
+
+                    return true;
+                });
+            });
+
+            // Assert
             Assert.True(hasCollision);
         }
 
         [Fact]
-        public void RunWithLockOfTResult_SameKey_HasNoCollision()
+        public void RunWithLockOfTResult_SameInstanceKey_HasNoCollision()
         {
             // Arrange
-            var key = new object();
-            var keyedLock = new KeyedLock<object>();
+            const int key = 123;
+            var keyedLock = new KeyedLock<int>();
 
             var isRunning = false;
             var hasCollision = false;
