@@ -1,4 +1,4 @@
-﻿namespace KeyedLocks.Tests
+﻿namespace KeyLocks.Tests
 {
     public abstract class TestBase
     {

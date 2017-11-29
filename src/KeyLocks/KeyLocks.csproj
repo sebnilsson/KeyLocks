@@ -3,14 +3,14 @@
   <PropertyGroup>
     <TargetFramework>netstandard1.1</TargetFramework>
 
-    <PackageId>KeyedLocks</PackageId>
+    <PackageId>KeyLocks</PackageId>
     <Version>1.0.0</Version>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <Description>Run code with locks based on different object-types</Description>
     
     <Authors>Sebastian Nilsson</Authors>
-    <PackageProjectUrl>https://github.com/sebnilsson/KeyedLocks</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/sebnilsson/KeyedLocks</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/sebnilsson/KeyLocks</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/sebnilsson/KeyLocks</RepositoryUrl>
   </PropertyGroup>
 
 </Project>

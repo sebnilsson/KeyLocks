@@ -2,17 +2,17 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 
-namespace KeyedLocks
+namespace KeyLocks
 {
-    public class KeyedLock<T>
+    public class KeyLock<T>
     {
         protected internal readonly ConcurrentDictionary<T, object> Locks;
 
-        public KeyedLock() : this(EqualityComparer<T>.Default)
+        public KeyLock() : this(EqualityComparer<T>.Default)
         {
         }
 
-        public KeyedLock(IEqualityComparer<T> comparer)
+        public KeyLock(IEqualityComparer<T> comparer)
         {
             Locks = new ConcurrentDictionary<T, object>(comparer);
         }

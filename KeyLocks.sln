@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.15
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyedLocks", "src\KeyedLocks\KeyedLocks.csproj", "{B536BA34-DBE6-408A-ABF3-18B72AD1774A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyLocks", "src\KeyLocks\KeyLocks.csproj", "{B536BA34-DBE6-408A-ABF3-18B72AD1774A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyedLocks.Tests", "test\KeyedLocks.Tests\KeyedLocks.Tests.csproj", "{1D69C244-AAC8-43F9-A8AC-DFF8A2F3F2C7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyLocks.Tests", "test\KeyLocks.Tests\KeyLocks.Tests.csproj", "{1D69C244-AAC8-43F9-A8AC-DFF8A2F3F2C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

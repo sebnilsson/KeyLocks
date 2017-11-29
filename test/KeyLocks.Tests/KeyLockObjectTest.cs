@@ -2,9 +2,9 @@
 using System.Threading.Tasks;
 using Xunit;
 
-namespace KeyedLocks.Tests
+namespace KeyLocks.Tests
 {
-    public class KeyedObjectLockTest : TestBase
+    public class KeyLockObjectTest : TestBase
     {
         [Fact]
         public void RunWithLock_UniqueObjectKeys_HasCollision()
@@ -13,13 +13,13 @@ namespace KeyedLocks.Tests
             var key1 = new { Key1 = "Key1" };
             var key2 = new { Key2 = "Key2" };
             var key3 = new { Key3 = "Key3" };
-            var keyedLock = new KeyedLock<object>();
+            var keyLock = new KeyLock<object>();
 
             var isRunning = false;
             var hasCollision = false;
 
             // Act
-            Parallel.ForEach(new object[] {key1, key2, key3}, key => keyedLock.RunWithLock(key, () =>
+            Parallel.ForEach(new object[] {key1, key2, key3}, key => keyLock.RunWithLock(key, () =>
             {
                 hasCollision = hasCollision || isRunning;
 
@@ -39,13 +39,13 @@ namespace KeyedLocks.Tests
         {
             // Arrange
             var key = new object();
-            var keyedLock = new KeyedLock<object>();
+            var keyLock = new KeyLock<object>();
 
             var isRunning = false;
             var hasCollision = false;
 
             // Act
-            Parallel.For(0, ParallelRunCount, _ => keyedLock.RunWithLock(key, () =>
+            Parallel.For(0, ParallelRunCount, _ => keyLock.RunWithLock(key, () =>
             {
                 hasCollision = hasCollision || isRunning;
 
@@ -67,7 +67,7 @@ namespace KeyedLocks.Tests
             var key1 = new { Key1 = "Key1" };
             var key2 = new { Key2 = "Key2" };
             var key3 = new { Key3 = "Key3" };
-            var keyedLock = new KeyedLock<object>();
+            var keyLock = new KeyLock<object>();
 
             var isRunning = false;
             var hasCollision = false;
@@ -75,7 +75,7 @@ namespace KeyedLocks.Tests
             // Act
             Parallel.ForEach(new object[] {key1, key2, key3}, key =>
             {
-                var _ = keyedLock.RunWithLock(key, () =>
+                var _ = keyLock.RunWithLock(key, () =>
                 {
                     hasCollision = hasCollision || isRunning;
 
@@ -98,7 +98,7 @@ namespace KeyedLocks.Tests
         {
             // Arrange
             var key = new object();
-            var keyedLock = new KeyedLock<object>();
+            var keyLock = new KeyLock<object>();
 
             var isRunning = false;
             var hasCollision = false;
@@ -106,7 +106,7 @@ namespace KeyedLocks.Tests
             // Act
             Parallel.For(0, ParallelRunCount, i =>
             {
-                var _ = keyedLock.RunWithLock(key, () =>
+                var _ = keyLock.RunWithLock(key, () =>
                 {
                     hasCollision = hasCollision || isRunning;
 

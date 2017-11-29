@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\KeyedLocks\KeyedLocks.csproj" />
+    <ProjectReference Include="..\..\src\KeyLocks\KeyLocks.csproj" />
   </ItemGroup>
 
 </Project>
